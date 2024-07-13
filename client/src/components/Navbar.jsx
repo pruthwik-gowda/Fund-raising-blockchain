@@ -28,7 +28,7 @@ const Navbar = () => {
       </div>
 
       <div className="sm:flex hidden flex-row justify-end gap-4">
-      {/* {(address)?<CustomButton 
+        {/* {(address)?<CustomButton 
           btnType="button"
           title={address ? 'Create a campaign' : 'Connect'}
           styles={address ? 'bg-[#1dc071]' : 'bg-[#8c6dfd]'}
@@ -39,11 +39,11 @@ const Navbar = () => {
         />: */}
         {<ConnectWallet></ConnectWallet>}
 
-        <Link to="/profile">
+        {/* <Link to="/profile">
           <div className="w-[52px] h-[52px] rounded-full bg-[#2c2f32] flex justify-center items-center cursor-pointer">
             <img src={thirdweb} alt="user" className="w-[60%] h-[60%] object-contain" />
           </div>
-        </Link>
+        </Link> */}
       </div>
 
       {/* Small screen navigation */}
@@ -84,15 +84,19 @@ const Navbar = () => {
             </ul>
 
             <div className="flex mx-4">
-            <CustomButton 
+            {/* <CustomButton 
               btnType="button"
               title={address ? 'Create a campaign' : 'Connect'}
               styles={address ? 'bg-[#1dc071]' : 'bg-[#8c6dfd]'}
+              // handleClick={() => {
+              //   if(address) navigate('create-campaign')
+              //   else {<ConnectWallet></ConnectWallet>};
+              // }}
               handleClick={() => {
-                if(address) navigate('create-campaign')
-                else connect();
+                {<ConnectWallet></ConnectWallet>};
               }}
-            />
+            /> */}
+            {<ConnectWallet></ConnectWallet>};
             </div>
           </div>
         </div>
