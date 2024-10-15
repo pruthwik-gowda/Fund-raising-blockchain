@@ -8,7 +8,7 @@ import {ethers} from 'ethers';
 const StateContext = createContext();
 
 export const StateContextProvider = ({children}) => {
-    const { contract } = useContract('0x72B4c43470daD57D80c6B195181f01753c30ce68');
+    const { contract } = useContract('0xe3d9b9bD51E55aCfC1ef5067750a060251d19eE9');
 
     const { mutateAsync: createCampaign } = useContractWrite(contract, 'createCampaign');
 
@@ -20,12 +20,14 @@ export const StateContextProvider = ({children}) => {
     try {
       const data = await createCampaign({
 				args: [
-					address, // owner
+					address, // owner (evrytime someone create a new campaign, the useConnect hook will give us the address that person)
+          // also everytime the address changes in the projct, the useConnect hook sets the address variable address to the new address
 					form.title, // title
 					form.description, // description
 					form.target,
 					new Date(form.deadline).getTime(), // deadline,
 					form.image,
+          form.upiId,
 				],
 			});
 
@@ -46,6 +48,7 @@ export const StateContextProvider = ({children}) => {
       deadline: campaign.deadline.toNumber(),
       amountCollected: ethers.utils.formatEther(campaign.amountCollected.toString()),
       image: campaign.image,
+      upiId: campaign.upiId,
       pId: i
     }));
 

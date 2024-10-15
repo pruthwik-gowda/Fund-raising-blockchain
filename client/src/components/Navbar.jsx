@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useStateContext } from '../context';
@@ -14,7 +14,9 @@ const Navbar = () => {
   const [toggleDrawer, setToggleDrawer] = useState(false);
   const { connect, address } = useStateContext();
 
- 
+  useEffect(() => {
+    console.log(address);
+  }, [address])
   
 
   return (
@@ -38,7 +40,6 @@ const Navbar = () => {
           }}
         />: */}
         {<ConnectWallet></ConnectWallet>}
-
         {/* <Link to="/profile">
           <div className="w-[52px] h-[52px] rounded-full bg-[#2c2f32] flex justify-center items-center cursor-pointer">
             <img src={thirdweb} alt="user" className="w-[60%] h-[60%] object-contain" />

@@ -18,11 +18,13 @@ const CreateCampaign = () => {
     description: '',
     target: '', 
     deadline: '',
-    image: ''
+    image: '',
+    upiId: ''
   });
 
   const handleFormFieldChange = (fieldName, e) => {
     setForm({ ...form, [fieldName]: e.target.value })
+    console.log(form)
   }
 
   const handleSubmit = async (e) => {
@@ -102,6 +104,14 @@ const CreateCampaign = () => {
             inputType="url"
             value={form.image}
             handleChange={(e) => handleFormFieldChange('image', e)}
+          />
+        
+        <FormField 
+            labelName="Campaign upiId *"
+            placeholder="Enter your UPI ID"
+            inputType="text"
+            value={form.upiId}
+            handleChange={(e) => handleFormFieldChange('upiId', e)}
           />
 
           <div className="flex justify-center items-center mt-[40px]">
