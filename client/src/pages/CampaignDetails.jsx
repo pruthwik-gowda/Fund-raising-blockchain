@@ -18,6 +18,7 @@ const CampaignDetails = () => {
   const [amountUPI, setAmountUPI] = useState('');
   const [donators, setDonators] = useState([]);
   const [qrCodeURL, setQrCodeURL] = useState(''); // State to store the QR code URL
+  const [isAmount, setIsAmount] = useState(false);
 
   const remainingDays = daysLeft(state.deadline);
 
@@ -32,7 +33,12 @@ const CampaignDetails = () => {
 
   const handleDonate = async () => {
     setIsLoading(true);
-    await donate(state.pId, amount);
+    try{
+      await donate(state.pId, amount);
+    }
+    catch(err){
+      console.log(err)
+    }
     navigate('/');
     setIsLoading(false);
   };
@@ -51,6 +57,15 @@ const CampaignDetails = () => {
       console.error('Error fetching QR code:', error);
     }
   };
+
+  const updateAmount = (value) => {
+    setAmount(value);
+    setIsAmount(true);
+  }
+
+  const handleAmountNotEntered = () => {
+    alert("amount not entered")
+  }
 
   useEffect(() => {
     if (state.upiId) {
@@ -131,16 +146,22 @@ const CampaignDetails = () => {
                 step="0.01"
                 className="mb-10 w-full py-[10px] sm:px-[20px] px-[15px] outline-none border-[1px] border-[#3a3a43] bg-transparent font-epilogue text-white text-[18px] leading-[30px] placeholder:text-[#4b5264] rounded-[10px]"
                 value={amount}
-                onChange={(e) => setAmount(e.target.value)}
+                onChange={(e) => updateAmount(e.target.value)}
                 required
               />
 
-              <CustomButton 
+              {isAmount ? <CustomButton 
                 btnType="button"
                 title="Fund Campaign"
                 styles="w-full bg-[#8c6dfd]"
                 handleClick={handleDonate}
-              />
+              /> : <CustomButton 
+              btnType="button"
+              title="Fund Campaign"
+              styles="w-full bg-[#8c6dfd]"
+              handleClick={handleAmountNotEntered}
+            /> }
+
             </div>
 
             <div className="mt-[30px]">
