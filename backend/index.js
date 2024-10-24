@@ -2,6 +2,7 @@ const express = require('express');
 const QRCode = require('qrcode');
 const cors = require('cors');
 const app = express();
+const { verifyAadhar } = require('./verify-aadhar.js')
 
 app.use(cors());
 app.use(express.json()); // Middleware to parse JSON request body
@@ -28,6 +29,23 @@ app.post('/generate-qr', async (req, res) => {
     res.status(500).json({ error: 'Error generating QR code' });
   }
 });
+
+app.post('/verify-aadhar', async (req, res) => {
+  const { aadharNumber } = req.body;
+
+  try{
+    if(aadharNumber){
+      const isValid = verifyAadhar(aadharNumber)
+
+      res.json({ isValid });
+    }
+  }catch(err){
+    console.log("Error verifying aadhar number", err)
+    res.status(500).json({ error: "Error verifying aadhar number"})
+  }
+}) 
+
+
 
 // Start the server
 const PORT = process.env.PORT || 5000;

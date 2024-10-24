@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { ethers } from 'ethers';
-
+import axios from 'axios';
 import { useStateContext } from '../context/index.jsx';
 import { createCampaign, money } from '../assets';
 import { CustomButton, FormField, Loader } from '../components';
@@ -21,23 +21,52 @@ const CreateCampaign = () => {
     image: '',
     upiId: ''
   });
+  const [aadharNumber, setAadharNumber] = useState('');
+  const [validAadhar, setValidAadhar] = useState(false);
 
   const handleFormFieldChange = (fieldName, e) => {
     setForm({ ...form, [fieldName]: e.target.value })
     console.log(form)
   }
 
+  const handleAadharNumber = async (e) => {
+    const updatedAadharNumber = e.target.value;
+    setAadharNumber(updatedAadharNumber); // Update the aadhar number state
+    console.log(updatedAadharNumber);
+    if(updatedAadharNumber.length == 12){
+    try {
+      const response = await axios.post('http://localhost:5000/verify-aadhar', {
+        aadharNumber: updatedAadharNumber, // Use the latest value directly from the input
+      });
+  
+      if (response.status === 200) {
+        setValidAadhar(response.data.isValid); // Set valid Aadhar based on the response
+        console.log(response.data.isValid);
+      } else {
+        alert('Provide a valid aadhar number');
+      }
+    } catch (err) {
+      console.log('Error while verifying aadhar number: ', err);
+    }
+  }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     checkIfImage(form.image, async (exists) => {
-      if(exists) {
+      if(exists && validAadhar) {
         setIsLoading(true)
         await createCampaign({ ...form, target: ethers.utils.parseUnits(form.target, 18)})
         setIsLoading(false);
         navigate('/');
       } else {
-        alert('Provide valid image URL')
+        if(exists){
+          alert('Provide a valid aadhar number')
+        }
+        else if(validAadhar){
+          alert('Provide a valid image url')
+
+        }
         setForm({ ...form, image: '' });
       }
     })
@@ -112,6 +141,14 @@ const CreateCampaign = () => {
             inputType="text"
             value={form.upiId}
             handleChange={(e) => handleFormFieldChange('upiId', e)}
+          />
+
+        <FormField 
+            labelName="Aadhar number *"
+            placeholder="Enter your aadhar number"
+            inputType="text"
+            value={aadharNumber}
+            handleChange={(e) => handleAadharNumber(e)}
           />
 
           <div className="flex justify-center items-center mt-[40px]">
