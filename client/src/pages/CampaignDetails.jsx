@@ -34,7 +34,8 @@ const CampaignDetails = () => {
   const handleDonate = async () => {
     setIsLoading(true);
     try{
-      await donate(state.pId, amount);
+      if(address) await donate(state.pId, amount)
+      else alert("Connect your wallet")
     }
     catch(err){
       console.log(err)
@@ -46,7 +47,7 @@ const CampaignDetails = () => {
   const fetchQrCode = async () => {
     try {
       // Send a request to your backend to generate the QR code
-      const response = await axios.post('http://localhost:5000/generate-qr', {
+      const response = await axios.post('http://192.168.29.161:5000/generate-qr', {
         upiId: state.upiId,
         amount: amountUPI || '0', // Default amount to 0 if none is provided
       });
@@ -122,8 +123,8 @@ const CampaignDetails = () => {
             <div className="mt-[20px] flex flex-col gap-4">
               {donators.length > 0 ? donators.map((item, index) => (
                 <div key={`${item.donator}-${index}`} className="flex justify-between items-center gap-4">
-                  <p className="font-epilogue font-normal text-[16px] text-[#b2b3bd] leading-[26px] break-ll">{index + 1}. {item.donator}</p>
-                  <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] break-ll">{item.donation}</p>
+                  <p className="font-epilogue font-normal text-[16px] text-[#b2b3bd] leading-[26px] break-ll">{index + 1}. {item.donator} - {item.donation} ETH</p>
+                  {/* <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] break-ll">{item.donation}</p> */}
                 </div>
               )) : (
                 <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] text-justify">No donators yet. Be the first one!</p>
@@ -135,16 +136,16 @@ const CampaignDetails = () => {
         <div className="flex-1">
           <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">Fund</h4>   
 
-          <div className="mt-[20px] flex flex-col p-4 bg-[#1c1c24] rounded-[10px]">
+          <div className="mt-[20px] flex flex-col justify-around space-y-5 p-4 bg-[#1c1c24] rounded-[10px]">
             <p className="font-epilogue fount-medium text-[20px] leading-[30px] text-center text-[#808191]">
               Fund the campaign through crypto
             </p>
-            <div className="mt-[30px]">
+            {/* <div className="mt-[30px] flex flex-col justify-around space-y-5"> */}
               <input 
                 type="number"
                 placeholder="ETH 0.1"
                 step="0.01"
-                className="mb-10 w-full py-[10px] sm:px-[20px] px-[15px] outline-none border-[1px] border-[#3a3a43] bg-transparent font-epilogue text-white text-[18px] leading-[30px] placeholder:text-[#4b5264] rounded-[10px]"
+                className="w-full py-[10px] sm:px-[20px] px-[15px] outline-none border-[1px] border-[#3a3a43] bg-transparent font-epilogue text-white text-[18px] leading-[30px] placeholder:text-[#4b5264] rounded-[10px]"
                 value={amount}
                 onChange={(e) => updateAmount(e.target.value)}
                 required
@@ -162,9 +163,16 @@ const CampaignDetails = () => {
               handleClick={handleAmountNotEntered}
             /> }
 
+            {/* </div> */}
+
+            
             </div>
 
-            <div className="mt-[30px]">
+
+          <div className="mt-[20px] flex flex-col p-4 bg-[#1c1c24] rounded-[10px]">
+
+
+            <div className="flex flex-col justify-around space-y-5">
               <p className="font-epilogue fount-medium text-[20px] leading-[30px] text-center text-[#808191]">
                 Fund the campaign through UPI
               </p>
@@ -172,7 +180,7 @@ const CampaignDetails = () => {
               <input 
                 type="number"
                 placeholder="Enter the amount"
-                className=" w-full py-[10px] sm:px-[20px] px-[15px] outline-none border-[1px] border-[#3a3a43] bg-transparent font-epilogue text-white text-[18px] leading-[30px] placeholder:text-[#4b5264] rounded-[10px]"
+                className="w-full py-[10px] sm:px-[20px] px-[15px] outline-none border-[1px] border-[#3a3a43] bg-transparent font-epilogue text-white text-[18px] leading-[30px] placeholder:text-[#4b5264] rounded-[10px]"
                 value={amountUPI}
                 onChange={(e) => setAmountUPI(e.target.value)}
                 required
@@ -188,13 +196,12 @@ const CampaignDetails = () => {
 
               <div className="my-[20px] p-4 bg-[#13131a] rounded-[10px]">
                 <h4 className="font-epilogue font-semibold text-center text-[14px] leading-[22px] text-white">{state.upiId}</h4>
-                <p className="mt-[20px] font-epilogue font-normal leading-[22px] text-[#808191]">Support the project for no reward, just because it speaks to you.</p>
               </div>
             </div>
           </div>
+          </div>    
         </div>
       </div>
-    </div>
   );
 };
 

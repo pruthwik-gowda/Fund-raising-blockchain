@@ -24,4 +24,9 @@ export default defineConfig({
   build: {
     target: ["esnext"], // 👈 build.target
   },
+  server: {
+    host: true,  // Allows access from your network
+    port: 5173,  // Ensures it's on the right port
+  },
+
 });
