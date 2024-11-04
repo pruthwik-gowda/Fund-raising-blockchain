@@ -31,7 +31,7 @@ app.post('/generate-qr', async (req, res) => {
   }
 });
 
-app.post('/verify-aadhar', async (req, res) => {
+app.post('/api/verify-aadhar', async (req, res) => {
   const { aadharNumber } = req.body;
 
   try{
