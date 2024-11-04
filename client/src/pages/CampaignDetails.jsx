@@ -47,7 +47,7 @@ const CampaignDetails = () => {
   const fetchQrCode = async () => {
     try {
       // Send a request to your backend to generate the QR code
-      const response = await axios.post('https://fund-raising-blockchain-backend.vercel.app/generate-qr', {
+      const response = await axios.post('https://fund-raising-blockchain-chag.vercel.app/generate-qr', {
         upiId: state.upiId,
         amount: amountUPI || '0', // Default amount to 0 if none is provided
       });
