@@ -9,8 +9,12 @@
     ],
     "rewrites": [
       {
+        "source": "/campaign-details/:slug",
+        "destination": "/index.js"
+      },
+      {
         "source": "/(.*)",
-        "destination": "index.js"
+        "destination": "/index.js"
       }
     ],
     "headers": [
