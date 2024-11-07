@@ -24,6 +24,3 @@ const App = () => {
 }
 
 export default App;
-
-//BUGS
-//->make sure the eth value is filled before funding

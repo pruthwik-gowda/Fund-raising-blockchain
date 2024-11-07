@@ -12,6 +12,7 @@ import menu from './menu.svg';
 import money from './money.svg';
 import loader from './loader.svg';
 import thirdweb from './thirdweb.png';
+import home_page_logo from './home_page_logo.png';
 
 export {
   tagType,
@@ -28,4 +29,5 @@ export {
   money,
   loader,
   thirdweb,
+  home_page_logo,
 };
