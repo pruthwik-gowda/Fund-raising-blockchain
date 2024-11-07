@@ -37,12 +37,12 @@ const Sidebar = () => {
                   navigate(link.link);
                 }
               }}
-              styles="shadow-[0px_0px_2px_1px_rgba(255,255,255,0.5)] hover:shadow-[0px_0px_8px_1px_rgba(255,255,255,0.5)] transition-shadow duration-300"
+              styles="bg-[#1c1c24] shadow-secondary shadow-[0px_0px_2px_1px_rgba(255,255,255,0.5)] hover:shadow-[0px_0px_8px_1px_rgba(255,255,255,0.5)] transition-shadow duration-300"
             />
           ))}
         </div>
 
-        <Icon styles="bg-[#1c1c24] shadow-secondary" imgUrl={sun} />
+        <Icon styles="bg-[#1c1c24] shadow-secondary shadow-[0px_0px_2px_1px_rgba(255,255,255,0.5)] hover:shadow-[0px_0px_8px_1px_rgba(255,255,255,0.5)] transition-shadow duration-300" imgUrl={sun} />
       </div>
     </div>
   )
