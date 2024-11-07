@@ -94,8 +94,9 @@ const CampaignDetails = () => {
       </div>
 
       <div className="mt-[60px] flex lg:flex-row flex-col gap-5">
-        <div className="flex-[2] flex flex-col gap-[40px]">
+        <div className="flex-[2] flex flex-col gap-[20px]">
           {/* Campaign Creator */}
+          <div className="flex flex-col p-4 bg-[#1c1c24] rounded-[10px]">
           <div>
             <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">Creator</h4>
             <div className="mt-[20px] flex flex-row items-center flex-wrap gap-[14px]">
@@ -108,16 +109,20 @@ const CampaignDetails = () => {
               </div>
             </div>
           </div>
+          </div>
 
           {/* Campaign Story */}
+          <div className="flex flex-col p-4 bg-[#1c1c24] rounded-[10px]">
           <div>
             <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">Story</h4>
             <div className="mt-[20px]">
               <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] text-justify">{state.description}</p>
             </div>
           </div>
+          </div>
 
           {/* Donators */}
+          <div className="flex flex-col p-4 bg-[#1c1c24] rounded-[10px]">
           <div>
             <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">Donators</h4>
             <div className="mt-[20px] flex flex-col gap-4">
@@ -132,11 +137,11 @@ const CampaignDetails = () => {
             </div>
           </div>
         </div>
+        </div>
 
         <div className="flex-1">
-          <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">Fund</h4>   
 
-          <div className="mt-[20px] flex flex-col justify-around space-y-5 p-4 bg-[#1c1c24] rounded-[10px]">
+          <div className="flex flex-col justify-around space-y-5 p-4 bg-[#1c1c24] rounded-[10px]">
             <p className="font-epilogue fount-medium text-[20px] leading-[30px] text-center text-[#808191]">
               Fund the campaign through crypto
             </p>
