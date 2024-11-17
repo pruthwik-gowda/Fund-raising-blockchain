@@ -21,7 +21,7 @@ const Sidebar = () => {
   return (
     <div className="flex justify-between items-center flex-col sticky top-5 h-[93vh]">
       <Link to="/">
-        <img src={home_page_logo}  alt="home page logo" className="w-[52px] h-[52px] object-fill bg-white rounded shadow-[0px_0px_5px_rgba(255,255,255,0.5)] hover:shadow-[0px_4px_10px_rgba(255,255,255,0.5)] transition-shadow duration-300"/>
+        <img src={home_page_logo}  alt="home page logo" className="w-[52px] h-[52px] object-fill bg-white rounded shadow-secondary hover:shadow-[0px_0px_20px_rgba(74,205,141,1)] transition-shadow duration-300"/>
       </Link>
 
       <div className="flex-1 flex flex-col justify-between items-center bg-[#1c1c24] rounded-[20px] w-[76px] py-4 mt-12">
@@ -37,12 +37,12 @@ const Sidebar = () => {
                   navigate(link.link);
                 }
               }}
-              styles="bg-[#1c1c24] shadow-secondary shadow-[0px_0px_2px_1px_rgba(255,255,255,0.5)] hover:shadow-[0px_0px_8px_1px_rgba(255,255,255,0.5)] transition-shadow duration-300"
+              styles="bg-[#1c1c24] shadow-secondary hover:shadow-[0px_0px_20px_rgba(74,205,141,1)] transition-shadow duration-200"
             />
           ))}
         </div>
 
-        <Icon styles="bg-[#1c1c24] shadow-secondary shadow-[0px_0px_2px_1px_rgba(255,255,255,0.5)] hover:shadow-[0px_0px_8px_1px_rgba(255,255,255,0.5)] transition-shadow duration-300" imgUrl={sun} />
+        <Icon styles="bg-[#1c1c24] shadow-secondary hover:shadow-[0px_0px_20px_rgba(74,205,141,1)] transition-shadow duration-200" imgUrl={sun} />
       </div>
     </div>
   )
